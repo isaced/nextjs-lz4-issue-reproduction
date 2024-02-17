@@ -1,7 +1,21 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+var fs = require("fs");
+var lz4 = require("lz4");
+
+function doSomething() {
+  var encoder = lz4.createEncoderStream();
+
+  var input = fs.createReadStream("test");
+  var output = fs.createWriteStream("test.lz4");
+
+  input.pipe(encoder).pipe(output);
+}
 
 export default function Home() {
+
+  doSomething()
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
